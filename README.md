@@ -32,6 +32,30 @@ Look for `dsh-gstack` in `dsh.profile.bundles` and `dsh-gstack-skills` in the
 composed config. The skill catalog should then list `gstack` and the
 `gstack-*` skills.
 
+### Troubleshooting
+
+**`ERR_PNPM_ADDING_TO_ROOT`** — a DSH profile is itself a pnpm workspace (it
+declares `packages: ['.', 'plugins/*']` in `pnpm-workspace.yaml`), so pnpm
+refuses an `add` that targets the workspace root. Either keep `-w` on the CLI,
+or add this to the profile's `pnpm-workspace.yaml` so GUI installs work too:
+
+```yaml
+ignoreWorkspaceRootCheck: true
+```
+
+**`'git' is not recognized`** — a `github:` spec is resolved through
+`git ls-remote`, so git must be on `PATH`. If it is not, install from a tarball
+URL instead, which needs no git:
+
+```bash
+dsh plugin --profile desktop add -w \
+  https://codeload.github.com/kevinmen518-coder/dsh-gstack/tar.gz/refs/heads/main
+```
+
+**Skills installed but never listed** — the skill provider needs `dshHome` and
+`agentsHome`; both are mandatory in the `dsh-skill-filesystem` schema and have
+no defaults. This bundle sets them explicitly in `cordis.patch.yml`.
+
 ## What is included
 
 All upstream skills are included as Markdown with their supporting resources
