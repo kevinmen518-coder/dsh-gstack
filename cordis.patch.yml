@@ -3,6 +3,11 @@
 # Registers this package's own skills/ directory as an isolated DSH skill root.
 # baseUrl is resolved by DSH to this package, so the path follows installation.
 # providerName must be unique: a second provider with the same name is rejected.
+#
+# dshHome and agentsHome are required by the skill-filesystem config schema and
+# have no defaults. Leaving them out makes the provider fail validation, and the
+# scan is skipped silently, so they are always set here even though this
+# provider only reads customSkillDirs.
 
 - insert:
     - id: dsh-gstack-skills
@@ -10,5 +15,7 @@
       config:
         providerName: dsh-gstack
         includeDefaultRoots: false
+        dshHome: ~/.dsh
+        agentsHome: ~/.agents
         customSkillDirs:
           - !!js "process.getBuiltinModule('node:url').fileURLToPath(new URL('skills/', baseUrl))"
