@@ -25,6 +25,13 @@ class PackageTests(unittest.TestCase):
         self.assertNotIn("C:/Users/", patch)
         self.assertNotIn("C:\\Users\\", patch)
 
+    def test_bundle_patch_sets_required_homes(self) -> None:
+        # The skill-filesystem schema requires both homes and has no defaults;
+        # without them the provider fails validation and no skill is scanned.
+        patch = (ROOT / "cordis.patch.yml").read_text(encoding="utf-8")
+        self.assertIn("dshHome: ~/.dsh", patch)
+        self.assertIn("agentsHome: ~/.agents", patch)
+
     def test_expected_skill_count(self) -> None:
         skill_files = sorted(SKILLS.glob("*/SKILL.md"))
         self.assertGreaterEqual(len(skill_files), 62)
