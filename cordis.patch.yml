@@ -1,0 +1,14 @@
+# dsh-gstack bundle patch
+#
+# Registers this package's own skills/ directory as an isolated DSH skill root.
+# baseUrl is resolved by DSH to this package, so the path follows installation.
+# providerName must be unique: a second provider with the same name is rejected.
+
+- insert:
+    - id: dsh-gstack-skills
+      name: '@deepseek-ai/dsh-skill-filesystem'
+      config:
+        providerName: dsh-gstack
+        includeDefaultRoots: false
+        customSkillDirs:
+          - !!js "process.getBuiltinModule('node:url').fileURLToPath(new URL('skills/', baseUrl))"

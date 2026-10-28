@@ -1,0 +1,9 @@
+# Build inputs and generated output
+.build/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# Local packaging artifacts
+*.tgz

@@ -1,0 +1,37 @@
+{
+  "name": "dsh-gstack",
+  "version": "1.91.293",
+  "description": "garrytan/gstack skills, rendered for DeepSeek Harness",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "skills",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE",
+    "NOTICE.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "gstack",
+    "skills"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinmen518-coder/dsh-gstack.git"
+  },
+  "homepage": "https://github.com/kevinmen518-coder/dsh-gstack#readme",
+  "bugs": {
+    "url": "https://github.com/kevinmen518-coder/dsh-gstack/issues"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
